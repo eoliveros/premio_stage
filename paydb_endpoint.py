@@ -309,7 +309,7 @@ def user_update_email():
     utils.email_user_update_email_request(logger, req, req.MINUTES_EXPIRY)
     db.session.add(req)
     db.session.commit()
-    return 'confirmation email sent'
+    return 'ok'
 
 @paydb.route('/user_update_email_confirm/<token>', methods=['GET'])
 @limiter.limit("3/hour")
@@ -471,3 +471,4 @@ def register_user():
         flash('Check the email to confirm.', 'success')
         return redirect('/')
     return render_template('paydb/register_user.html', form=form)
+

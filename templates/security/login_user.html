@@ -16,7 +16,7 @@
                 {{ render_field(login_user_form.submit, class="btn btn-primary") }}
             </form>
             {% if security.registerable %}
-            <p>Not yet signed up? Please <a href="{{ url_for('paydb.register_user') }}">register for an account</a>.</p>
+            <p>Not yet signed up? Please <a href="{{ url_for('security.register') }}">register for an account</a>.</p>
             {% endif %}
             {% if security.recoverable %}
             <p>Forgot password? <a href="{{ url_for('security.forgot_password') }}">Reset your password</a>.</p>
