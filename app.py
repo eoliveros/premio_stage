@@ -23,8 +23,8 @@ def teardown_logging():
 
 def add_user(email, password):
     with app.app_context():
-        user = User.from_email(db.session, email)
         email = email.lower()
+        user = User.from_email(db.session, email)
         if user:
             #logger.error("user already exists")
             #return

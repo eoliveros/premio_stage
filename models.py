@@ -87,10 +87,9 @@ class User(db.Model, UserMixin):
     photo = db.Column(db.String())
     photo_type = db.Column(db.String(255))
 
-    def __init__(self, email, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.token = secrets.token_urlsafe(8)
-        self.email = email.lower()
 
     @classmethod
     def from_email(cls, session, email):
