@@ -236,7 +236,6 @@ def api_key_confirm(token=None, secret=None):
     return render_template('paydb/api_key_confirm.html', req=req, perms=Permission.PERMS_ALL)
 
 @paydb.route('/user_info', methods=['POST'])
-@limiter.exempt
 def user_info():
     sig = request_get_signature()
     content = request.get_json(force=True)
@@ -380,7 +379,6 @@ def user_update_photo():
     return jsonify(dict(photo=user.photo, photo_type=user.photo_type))
 
 @paydb.route('/user_transactions', methods=['POST'])
-@limiter.exempt
 def user_transactions():
     sig = request_get_signature()
     content = request.get_json(force=True)
@@ -402,7 +400,6 @@ def user_transactions():
     return jsonify(dict(txs=txs))
 
 @paydb.route('/transaction_create', methods=['POST'])
-@limiter.exempt
 def transaction_create():
     sig = request_get_signature()
     content = request.get_json(force=True)
@@ -422,7 +419,6 @@ def transaction_create():
     return jsonify(dict(tx=tx.to_json()))
 
 @paydb.route('/transaction_info', methods=['POST'])
-@limiter.exempt
 def transaction_info():
     sig = request_get_signature()
     content = request.get_json(force=True)
