@@ -57,8 +57,8 @@ def email_exception(logger, msg):
 
 def email_payment_claim(logger, asset_name, payment, hours_expiry):
     url = url_for("claim_payment", token=payment.token, _external=True)
-    msg = f"You have a {int2asset(payment.amount)} {asset_name} payment waiting!<br/><br/>Claim your payment <a href='{url}'>here</a><br/><br/>Claim within {hours_expiry} hours"
-    send_email(logger, f"Claim your {asset_name} payment", msg, payment.email)
+    msg = f"You have a {int2asset(payment.amount)} {asset_name} reward waiting!<br/><br/>Claim your reward <a href='{url}'>here</a><br/><br/>Claim within {hours_expiry} hours"
+    send_email(logger, f"Claim your {asset_name} reward", msg, payment.email)
 
 def email_user_create_request(logger, req, minutes_expiry):
     url = url_for("paydb.user_registration_confirm", token=req.token, _external=True)

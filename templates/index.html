@@ -11,12 +11,14 @@
             <p><center>Dashboard</center></p>
             </div>
             </a>
+	    {% if config["PUSH_NOTIFICATION"] %}
             <a href="/push_notifications">
             <div class='white-dashboard'>
                 <img src="static/assets/img/index_img/notification.png" width="100" height="100">
             <p><center>Push Notification</center></p>
             </div>
             </a>
+	    {% endif %}
             {% if config["SERVER_MODE"] == "paydb" %}
             <a href="/issue">
             <div class='white-dashboard'>

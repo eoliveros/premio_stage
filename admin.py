@@ -3,7 +3,7 @@ import flask_admin
 from flask_admin import helpers as admin_helpers
 
 from app_core import app, db, SERVER_MODE_WAVES
-from models import security, RestrictedModelView, BaseOnlyUserOwnedModelView, ProposalModelView, UserModelView, AdminUserModelView, WavesTxModelView, PayDbApiKeyModelView, PayDbUserTransactionsView, PayDbAdminTransactionsView, PushNotificationLocationModelView, \
+from models import security, RestrictedModelView, BaseOnlyUserOwnedModelView, ProposalModelView, UserModelView, AdminUserModelView, WavesTxModelView, PayDbApiKeyModelView, PayDbUserTransactionsView, PayDbAdminTransactionsView, PushNotificationLocationModelView, CategoryModelView, \
     Role, User, ApiKey, PayDbTransaction, Category, Proposal, WavesTx, Topic, UserStash, UserStashRequest, PushNotificationLocation, Referral
 
 # Create admin
@@ -18,12 +18,13 @@ admin = flask_admin.Admin(
 admin.add_view(UserModelView(User, db.session, category='Admin'))
 admin.add_view(AdminUserModelView(User, db.session, category='Admin', endpoint='AdminUser'))
 admin.add_view(RestrictedModelView(Role, db.session, category='Admin'))
-admin.add_view(RestrictedModelView(Category, db.session, category='Admin'))
-admin.add_view(RestrictedModelView(Topic, db.session, category='Admin'))
+admin.add_view(CategoryModelView(Category, db.session, category='Admin'))
+if app.config["PUSH_NOTIFICATION"]:
+    admin.add_view(RestrictedModelView(Topic, db.session, category='Admin'))
+    admin.add_view(PushNotificationLocationModelView(PushNotificationLocation, db.session, category='Admin'))
 if app.config["USE_STASH"]:
     admin.add_view(RestrictedModelView(UserStash, db.session, category='Admin'))
     admin.add_view(RestrictedModelView(UserStashRequest, db.session, category='Admin'))
-admin.add_view(PushNotificationLocationModelView(PushNotificationLocation, db.session, category='Admin'))
 if app.config["USE_REFERRALS"]:
     admin.add_view(RestrictedModelView(Referral, db.session, category='Admin', name='Referrals'))
 admin.add_view(ProposalModelView(Proposal, db.session, name='Reward', endpoint='rewards'))

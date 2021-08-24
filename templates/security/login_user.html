@@ -15,9 +15,11 @@
                 {{ render_field(login_user_form.next) }}
                 {{ render_field(login_user_form.submit, class="btn btn-primary") }}
             </form>
-            {% if security.registerable %}
-            <p>Not yet signed up? Please <a href="{{ url_for('security.register') }}">register for an account</a>.</p>
-            {% endif %}
+	    {% if config["SHOW_USER_REGISTER"] %}
+                {% if security.registerable %}
+                <p>Not yet signed up? Please <a href="{{ url_for('security.register') }}">register for an account</a>.</p>
+                {% endif %}
+	    {% endif %}
             {% if security.recoverable %}
             <p>Forgot password? <a href="{{ url_for('security.forgot_password') }}">Reset your password</a>.</p>
             {% endif %}
