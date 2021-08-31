@@ -1,5 +1,13 @@
 {% extends 'admin/base.html' %}
 
+{% if config["LOGO_URL_SRC"] %}
+{% block brand %}
+<a href='http://{{ config["SERVER_NAME"] }}'>
+	<img style="padding: 7px;" src='{{ config["LOGO_URL_SRC"] }}' alt="" height="50" width="150">
+</a>
+{% endblock %}
+{% endif %}
+
 {% block access_control %}
 {% if current_user.is_authenticated %}
 <div class="navbar-text btn-group pull-right">
